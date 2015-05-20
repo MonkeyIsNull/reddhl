@@ -9,7 +9,7 @@ defmodule Reddhl.Mixfile do
      start_permanent: Mix.env == :prod,
      deps: deps,
      description: description,
-     source_url: "https://github.com/MonkeyIsNull/reddhl"
+     source_url: "https://github.com/MonkeyIsNull/reddhl",
      package: package ]
   end
 
@@ -20,23 +20,23 @@ defmodule Reddhl.Mixfile do
     [applications: [:logger]]
   end
 
+  defp deps do
+    [{:httpoison, "~> 0.6"},
+     {:poison, "~> 1.4.0"}]
+  end
+
   defp description do
     """
     An headline and link puller for Reddit and its various subreddits
     """
   end
 
-  
+
   defp package do
       [# These are the default files included in the package
        files: ["lib", "files", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*", "*LICENSE"],
        contributors: ["Adam Guyot"],
        licenses: ["Apache 2.0"],
        links: %{"GitHub" => "https://github.com/MonkeyIsNull/reddhl"}]
-  end
-
-  defp deps do
-    [{:httpoison, "~> 0.6"},
-     {:poison, "~> 1.4.0"}]
   end
 end
