@@ -17,12 +17,14 @@ defmodule Reddhl.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   defp deps do
-    [{:httpoison, "~> 0.6"},
-     {:poison, "~> 1.4.0"}]
+    [
+      {:httpoison, "~> 0.6"},
+      {:poison, "~> 1.4.0"}
+    ]
   end
 
   defp description do
