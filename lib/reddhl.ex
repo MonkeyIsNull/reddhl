@@ -21,51 +21,55 @@ defmodule Reddhl do
     |> HTTPoison.get
   end
 
-  defp handle_response({:ok, %{status_code: 302, body: _, headers: _}}) do
-    {:error, %{"error" => "Subreddit does not exist. Check spelling and try again."}}
-  end
-
+  # Everything is ok
   defp handle_response({:ok, %{status_code: 200, body: body, headers: _}}) do
     {:ok, Poison.Parser.parse!(body)}
+  end
+
+  # We choked on something not a 200
+  defp handle_response({:ok, %{status_code: 302, body: _, headers: _}}) do
+    {:error, "Subreddit does not exist. Check spelling and try again."}
   end
 
   defp handle_response({:ok, %{status_code: _, body: body, headers: _}}) do
     {:error, Poison.Parser.parse!(body)}
   end
 
+  # Decoding the responses
   defp decode_response({:ok, body}), do: body["data"]["children"]
 
   defp decode_response({:error, %{"error" => 403}}) do
-      IO.puts "Error: You must be invited to visit this community"
-      System.halt(2)
+    {:error, "You must be invited to visit this community"}
   end
 
   defp decode_response({:error, error}) do
-    IO.puts "Error: #{error["error"]}"
-    System.halt(2)
+    {:error, error}
   end
 
+  #Public API
   @doc """
   Returns the title of the thread at position 'num' in the threads Map.
   """
   def title(threads, num) do
     Enum.at(threads, num)
-    |> _title
+    |> get_title
   end
 
-  defp _title(thread) do
-      thread["data"]["title"]
-  end
 
   @doc """
   Returns the url of the thread at position 'num' in the threads Map.
   """
   def url(threads, num) do
     Enum.at(threads, num)
-    |> _url
+    |> get_url
   end
 
-  defp _url(thread) do
+  # Utility Funcs
+  defp get_title(thread) do
+      thread["data"]["title"]
+  end
+
+  defp get_url(thread) do
     thread["data"]["url"]
   end
 end
