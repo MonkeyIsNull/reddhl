@@ -21,7 +21,7 @@ Add the dependency to your mix.exs file:
 
 ```elixir
   defp deps do
-    [{:reddhl, "~> 0.0.1"}]
+    [{:reddhl, "~> 0.0.2"}]
   end
 ```
 
@@ -30,7 +30,11 @@ Add the dependency to your mix.exs file:
 * reddhl: [LICENSE](LICENSE)
 
 ## Release Notes
+### 0.0.2
 
+Merged in code from jinyeow
+Changed priv API from merge
+ 
 ### 0.0.1
 
 Initial Release

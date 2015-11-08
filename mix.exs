@@ -3,7 +3,7 @@ defmodule Reddhl.Mixfile do
 
   def project do
     [app: :reddhl,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -37,7 +37,7 @@ defmodule Reddhl.Mixfile do
   defp package do
       [# These are the default files included in the package
        files: ["lib", "files", "priv", "mix.exs", "README*", "readme*", "LICENSE*", "license*", "*LICENSE"],
-       contributors: ["Adam Guyot"],
+       maintainers: ["Adam Guyot"],
        licenses: ["Apache 2.0"],
        links: %{"GitHub" => "https://github.com/MonkeyIsNull/reddhl"}]
   end
